@@ -1,3 +1,7 @@
+# Supplier Qualification Portal.
+# Developed by Kartashov Vladislav.
+# 2021-2023.
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from .models import Person
@@ -33,9 +37,38 @@ def dra(request):
     supplierlist = DRA.objects.all()
     return render(request, "dra.html", {'title' : "Data reliability audit", 'supplierlist' : supplierlist})
 
+# Страница персонала
 def lqs(request):
     people = Person.objects.all()
-    return render(request, "lqs.html", {'title' : "List of qualification specialists", 'people' : people})
+
+    # Создание словарей для  списка файлов и списка ссылок
+    sert_lqs = {}
+    link_files_dict = {}
+    
+    for per_id in people:
+
+        # Формирование списка файлов - Certificates
+        
+        link_files = "/static/files/lqs/" + str(per_id.id) + "/"
+        dirPath = "..\\static\\files\\lqs\\" + str(per_id.id)
+        
+        # Получение списка имен файлов в дереве каталога
+        files = next(os.walk(dirPath))[2]
+
+        # Добавление в словарь списка файлов и списка ссылок
+        sert_lqs[per_id.id] = files
+        link_files_dict [per_id.id] = link_files
+        
+          
+
+    return render(request, "lqs.html", {
+        'title' : "List of qualification specialists",
+        'people' : people,
+        'sert_lqs' : sert_lqs,
+        'link_files_dict' : link_files_dict})
+
+
+
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Функции страниц сайта End----------------------------------------------------------------------------------------------------------------------------------
@@ -64,11 +97,13 @@ def supplier(request, id):
         
         # Формирование списка файлов - CQ и PQ
         
-        # link_files_cq = "/static/files/cqpq/" + str(supplier.id) + "/" + "cq" + "/"
-        # link_files_pq = "/static/files/cqpq/" + str(supplier.id) + "/" + "pq" + "/"
+        link_files_cq = "/static/files/cqpq/" + str(supplier.id) + "/" + "cq" + "/"
+        link_files_pq = "/static/files/cqpq/" + str(supplier.id) + "/" + "pq" + "/"
 
-        dirPathCQ = "...\\static\\files\\cqpq\\" + str(supplier.id) + "\\cq"
-        dirPathPQ = "...\\static\\files\\cqpq\\" + str(supplier.id) + "\\pq"
+        dirPathCQ = "..\\static\\files\\cqpq\\" + str(supplier.id) + "\\cq"
+        dirPathPQ = "..\\static\\files\\cqpq\\" + str(supplier.id) + "\\pq"
+        
+        # Получение списков имен файлов в дереве каталогов
         filesCQ = next(os.walk(dirPathCQ))[2]
         filesPQ = next(os.walk(dirPathPQ))[2]
                 
@@ -79,7 +114,9 @@ def supplier(request, id):
             'supplier' : supplier,
             'pqlist' : pqlist,
             'filesCQ' : filesCQ,
-            'filesPQ' : filesPQ})
+            'filesPQ' : filesPQ,
+            'link_files_cq' : link_files_cq,
+            'link_files_pq' : link_files_pq})
             
     # При отсутвии в БД поставщика с данным запросом - Вывод информации на экран
     except Supplier.DoesNotExist:
@@ -101,8 +138,11 @@ def supplierdra(request, id):
 
         
         # Формирование списка файлов - DRA
+        
         link_files = "/static/files/dra/" + str(supplier.numberOrd) + "/"
-        dirPath = "...\\static\\files\\dra\\" + str(supplier.numberOrd)
+        dirPath = "..\\static\\files\\dra\\" + str(supplier.numberOrd)
+        
+        # Получение списка имен файлов в дереве каталога
         files = next(os.walk(dirPath))[2]
 
 
@@ -490,3 +530,4 @@ def qStatusToHtml(status):
     
     else:
         return status 
+ 
