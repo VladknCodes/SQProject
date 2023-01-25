@@ -1,6 +1,6 @@
 # Supplier Qualification Portal.
 # Developed by Kartashov Vladislav.
-# 2021-2023.
+# 2023.
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
