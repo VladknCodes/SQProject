@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+    {% if people.count > 0 %}
+        {% for person in people %}
+    
+    
+            <!-- Main window -->
+            <div class="main_window">
+                <div class="main_block"></div>
+                
+                <div class="main_window_data_cont">
+                    <div class="main_window_data_cont_title"></div>
+                    <div class="main_window_data_cont_sect">
+                        <!-- Content Start -->
+                            <div class="person">
+
+                                    <div class="photo_person"><img src="/static/images/{{ person.id }}{{".jpg"}}"></div>
+                                    
+                                    <div class="person_data">
+                                        <div class="bold">{{ person.lastName }} {{ person.firstName }}</div>
+                                        <div>{{ person.position }}</div>
+                                        <div>{{ person.phone }}</div>
+                                        <div>{{ person.email }}</div>
+                                        
+                                        <div class="indent_br"></div>
+                                        
+                                        <div class="bold">Work experience:</div>
+                                        <div>{{ person.experience }}</div>
+
+                                        <div class="indent_br"></div>
+
+                                        <div class="bold">Work description:</div>
+                                        <div>{{ person.description | safe }}</div>
+
+                                        <div class="indent_br"></div>
+
+                                        <div class="bold">Certificates:</div>
+
+                                        
+
+                                                {% for key, value in sert_lqs.items %} 
+                                                    {% if key == person.id %}    
+
+                                                        
+                                                        {% for file in value %}
+
+                                                            <div>
+                                                                <a class="main_link_tr" href="{% for key2, value2 in link_files_dict.items %}{% if key2 == person.id %}{{ value2 }}{% endif %}{% endfor %}{{ file }}" target="_blank">{{ file }}</a>                                                     
+                                                            </div>
+                                                                                                           
+                                                        
+                                                        {% endfor %}
+                                                                
+
+
+                                                    {% endif %}
+                                                {% endfor %}
+                                        
+
+
+                                    </div>
+
+
+                            </div>    
+                        <!-- Content End -->
+                    </div>
+                
+                </div>
+                <div class="main_block"></div>
+            </div>
+            <!-- End Main window -->
+
+            <div class="main_indent"></div>
+
+
+        {% endfor %}
+    {% endif %}
+
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
