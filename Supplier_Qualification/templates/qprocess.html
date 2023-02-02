@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title"></div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+
+				<div> <!-- DIV -->
+					
+				<div>Реестр статуса закрытия ПКД</div>
+
+				<div class="indent_br"></div>
+
+
+				<table id="table_pak" class="table_as">
+					<thead class="table_thead_as">
+						<tr class="table_tr_as">
+						<th class="table_th_td_as">№</th>
+						<th class="table_th_td_as">Поставщик</th>
+						<th class="table_th_td_as">Продукция</th>
+						<th class="table_th_td_as">Проект</th>
+						<th class="table_th_td_as">Аудит</th>
+						<th class="table_th_td_as">Кол-во замечаний</th>
+						<th class="table_th_td_as">Кол-во закрытых замечаний</th>
+						<th class="table_th_td_as">Прогресс выполнения (%)</th>
+
+
+
+						</tr>
+					</thead>
+					<tbody class="table_tbody_as"></tbody>
+					</table>
+
+				<div class="indent_br"></div>
+
+				<!-- Start Audit data -->
+
+							
+				<script src="/static/js/qstatus.js"></script>
+
+
+				<!-- End Audit data -->
+
+
+
+				<div class="indent_br"></div>
+
+				<script>
+
+					var sp_data = [];
+					var sp_title =['Supplier', '%'];
+					sp_data.push(sp_title);
+
+
+					for (var key in items_qs) {
+						sp_temp = [];
+						sp_temp.push(items_qs[key].supplier);
+						sp_temp.push(items_qs[key].progress);
+						sp_data.push(sp_temp);
+
+					}
+
+
+				</script>
+
+				<div class="indent_br"></div>
+
+
+
+
+
+				<!-- График Start -->
+
+							<script type="text/javascript" src="/static/js/loader.js"></script>
+							<script type="text/javascript">
+							google.charts.load('current', {'packages':['bar']});
+							google.charts.setOnLoadCallback(drawStuff);
+
+							function drawStuff() {
+								var data = new google.visualization.arrayToDataTable(sp_data);
+
+								var options = {
+								width: 1000,
+								legend: { position: 'none' },
+								chart: {
+									title: 'Прогресс выполнения',
+									subtitle: '(%)' },
+								axes: {
+									x: {
+									0: { side: 'top', label: 'Поставщики'} // Top x-axis.
+									}
+								},
+								bar: { groupWidth: "90%" }
+								};
+
+								var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+								// Convert the Classic options to Material options.
+								chart.draw(data, google.charts.Bar.convertOptions(options));
+							};
+							</script>
+
+						<div id="top_x_div" style="width: 1000px; height: 500px;"></div>
+
+
+
+				<!-- График End -->
+
+				
+				</div> <!-- DIV -->
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
