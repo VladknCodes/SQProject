@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title"></div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+
+
+
+                {% if supplierlist.count > 0 %}
+
+                <script>
+                    function printAuditResult(res) {
+                        if (res >= 75) {
+                            document.write('<font color="#00BC00"><strong>' + res + '</strong></font>');
+                        }
+                        else if (res < 75) {
+                            document.write('<font color="#FF1A1A"><strong>' + res + '</strong></font>');
+                        }
+                    }
+                </script>
+
+                <table class="table_st">
+                    <thead class="table_thead_st">
+                        <tr class="table_tr_st">
+                            <th class="table_th_td_st">№ заявки</th>
+                            <th class="table_th_td_st">Дата</th>
+                            <th class="table_th_td_st">Поставщик</th>
+                            <th class="table_th_td_st">Закупочная процедура</th>
+                            <th class="table_th_td_st">Закупаемая продукция</th>
+                            <th class="table_th_td_st">Дата проведения аудита</th>
+                            <th class="table_th_td_st">Результаты аудита</th>
+                            <th class="table_th_td_st">Номер аудита</th>
+                            <th class="table_th_td_st">Примечание</th>
+                        </tr>
+
+                    </thead>
+                    {% for supplier in supplierlist %}
+                    <tr class="table_tr_st table_tr_link">
+                        <td class="table_th_td_st">{{ supplier.numberOrd }}</td>
+                        <td class="table_th_td_st">{{ supplier.dateOrd}}</td>
+                        <td class="table_th_td_st bold"><a class="main_link_tr" href='/dra/{{ supplier.numberOrd }}/'>{{ supplier.supplier }}</a></td>
+                        <td class="table_th_td_st">{{ supplier.procedureProc }}</td>
+                        <td class="table_th_td_st">{{ supplier.purchasedProd }}</td>
+                        <td class="table_th_td_st">{{ supplier.dateAudit}}</td>
+                        <td class="table_th_td_st"><script>printAuditResult({{ supplier.auditResult }})</script></td>                        
+                        <td class="table_th_td_st">{{ supplier.numberAudit }}</td>
+                        <td class="table_th_td_st">{{ supplier.comment }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+
+                {% endif %}
+
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
