@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+    {% if news.count > 0 %}
+        {% for news in news %}
+    
+    
+            <!-- Main window -->
+            <div class="main_window ">
+                <div class="main_block"></div>
+                
+                <div class="main_window_data_cont">
+                    <div class="main_window_data_cont_title">{{ news.dateNews }}</div>
+                    <div class="main_window_data_cont_sect">
+                        <!-- Content Start -->
+
+                            <div>{{ news.dataNews | safe }}</div>
+
+                        <!-- Content End -->
+                    </div>
+                
+                </div>
+                <div class="main_block"></div>
+            </div>
+            <!-- End Main window -->
+
+            <div class="main_indent"></div>
+
+
+        {% endfor %}
+    {% endif %}
+
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
