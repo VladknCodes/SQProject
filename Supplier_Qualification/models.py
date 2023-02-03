@@ -1,4 +1,5 @@
 from django.db import models
+
  
 # Класс для таблицы с данными по персоналу
 class Person(models.Model):
@@ -10,6 +11,10 @@ class Person(models.Model):
     experience = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return '%s %s' % (self.lastName, self.firstName)
+     
+     
 # Класс для таблицы с данными по аттестации поставщиков
 class Supplier(models.Model):
     name = models.TextField(null=True, blank=True)
@@ -18,6 +23,10 @@ class Supplier(models.Model):
     cqdata = models.TextField(null=True, blank=True)
     pq = models.TextField(null=True, blank=True)
     audited = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+     
 
 # Класс для таблицы с данными аудиту достоверности данных
 class DRA(models.Model):
@@ -34,7 +43,14 @@ class DRA(models.Model):
     comment = models.TextField(null=False, blank=True)
     auditors = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.supplier
+
+
 # Класс для таблицы с данными по новостному блоку
 class News(models.Model):
     dateNews = models.CharField(max_length=20, null=True, blank=True)
     dataNews = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.dateNews
