@@ -250,6 +250,8 @@ def createsp(request):
         supplier.cq = request.POST.get("cq")
         supplier.cqdata = request.POST.get("cqdata")
         supplier.pq = request.POST.get("pq")
+        supplier.audited = request.POST.get("audited")
+        
         supplier.save()
     return HttpResponseRedirect("/viewdbsp")
 
@@ -265,6 +267,8 @@ def editsp(request, id):
             supplier.cq = request.POST.get("cq")
             supplier.cqdata = request.POST.get("cqdata")
             supplier.pq = request.POST.get("pq")
+            supplier.audited = request.POST.get("audited")
+            
             supplier.save()
             return HttpResponseRedirect("/viewdbsp")
         else:
@@ -311,6 +315,7 @@ def createdra(request):
         supplier.auditResult = request.POST.get("auditResult")
         supplier.numberAudit = request.POST.get("numberAudit")
         supplier.comment = request.POST.get("comment")
+        supplier.auditors = request.POST.get("auditors")
 
         supplier.save()
     return HttpResponseRedirect("/viewdra")
@@ -333,6 +338,7 @@ def editdra(request, id):
             supplier.auditResult = request.POST.get("auditResult")
             supplier.numberAudit = request.POST.get("numberAudit")
             supplier.comment = request.POST.get("comment")
+            supplier.auditors = request.POST.get("auditors")
             
             supplier.save()
             return HttpResponseRedirect("/viewdra")
@@ -373,6 +379,7 @@ def printdbsp(request):
       <th>Commercial qualification</th>
       <th>Data</th>
       <th>Product qualification</th>
+      <th>Conducted audits and audit teams</th>
     </tr>
     """
     tcenter = ""
@@ -408,6 +415,8 @@ def printdbsp(request):
                    + supplierlist[id].cqdata
                    + "</td><td>"
                    + str(pqlist)
+                   + "</td><td>"
+                   + supplierlist[id].audited
                    + "</td></tr>"
                    + "\n")
         
