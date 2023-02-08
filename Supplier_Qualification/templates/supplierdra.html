@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Main information about the supplier</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+                
+                {{ supplier.supplierinfo | safe }}
+                
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Data reliability audit results</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+
+    
+                <table border="0" cellspacing="0" cellpadding="0">
+                    
+                    <tr>
+                        <td style="width:185px" class="bold">Закупочная процедура:</td>
+                        <td>{{ supplier.procedureProc }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: top" style="width:185px" class="bold">Закупаемая продукция:</td>
+                        <td>{{ supplier.purchasedProd }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:185px" class="bold">Дата проведения аудита:</td>
+                        <td>{{ supplier.dateAudit }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:185px" class="bold">Результаты аудита:</td>
+                        <td>{{ supplier.auditResult }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:185px" class="bold">Номер аудита:</td>
+                        <td>{{ supplier.numberAudit }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:185px" class="bold">Примечание:</td>
+                        <td>{{ supplier.comment }}</td>
+                    </tr>
+
+                </table>
+
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+    
+    
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Auditor team</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+                
+                {% if supplier.auditors %}
+
+                    {{ supplier.auditors | safe }}
+
+                {% else %}
+                
+                    <div>No auditors</div>
+                
+                {% endif %}
+                
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+    <div class="main_indent"></div>
+
+
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Data reliability audit files</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+
+               
+                {% if files %}
+
+                    {% for file in files %}
+                        <div><a class="main_link_tr" href="{{ link_files }}{{ file }}" target="_blank">{{ file }}</a></div>
+                    {% endfor %}
+
+
+                {% else %}
+                
+                    <div>No files</div>
+                
+                {% endif %}
+
+                
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+    <div class="main_indent"></div>
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
