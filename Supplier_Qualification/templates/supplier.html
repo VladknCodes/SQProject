@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Main information about the supplier</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+					
+                {{ supplier.supplierinfo | safe  }}
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Commercial and Product qualification</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+					
+
+                <table border="0" cellspacing="0" cellpadding="0">
+                    
+                    <tr>
+                        <td style="width:310px" class="bold">Commercial qualification status:</td>
+                        <td>{{ supplier.cq }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:310px" class="bold">Validity period of commercial qualification:</td>
+                        <td>{{ supplier.cqdata }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: top" style="width:310px" class="bold">Product qualification:</td>
+                        <td>{{ pqlist|safe }}</td>
+                    </tr>
+
+
+                </table>
+
+
+
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Conducted audits and audit teams</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+                    
+                {{ supplier.audited | safe }}
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title">Commercial and Product qualification files</div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                <!-- Content Start -->
+
+					
+                <div>Commercial qualification files</div>
+
+                <div class="indent_br"></div>                
+
+                {% if filesCQ %}
+
+                    {% for fileCQ in filesCQ %}
+                        <div><a class="main_link_tr" href="{{ link_files_cq }}{{ fileCQ }}" target="_blank">{{ fileCQ }}</a></div>
+                    {% endfor %}
+
+
+                {% else %}
+                
+                    <div>No files</div>
+                
+                {% endif %}
+
+                <div class="indent_br"></div> 
+                <div class="indent_br"></div> 
+                
+
+
+                <div>Product qualification files</div>
+
+                <div class="indent_br"></div>                
+
+                {% if filesPQ %}
+
+                    {% for filePQ in filesPQ %}
+                        <div><a class="main_link_tr" href="{{ link_files_pq }}{{ filePQ }}" target="_blank">{{ filePQ }}</a></div>
+                    {% endfor %}
+
+
+                {% else %}
+                
+                    <div>No files</div>
+                
+                {% endif %}
+
+
+
+
+
+                <!-- Content End -->
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
