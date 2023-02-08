@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DRA Supplier list - Edit</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>
+            <label>№</label><br>
+            <input type="text" name="numberItem" value="{{ supplier.numberItem }}" />
+        </p>
+
+        <p>
+            <label>№ заявки</label><br>
+            <input type="text" name="numberOrd" value="{{ supplier.numberOrd }}" />
+        </p>
+
+        <p>
+            <label>Дата</label><br>
+            <input type="text" name="dateOrd" value="{{ supplier.dateOrd }}" />
+        </p>
+
+        <p>
+            <label>Поставщик</label><br>
+            <textarea type="text" name="supplier">{{ supplier.supplier }}</textarea>
+        </p>
+
+        <p>
+            <label>Информация о поставщике</label><br>
+            <textarea type="text" name="supplierinfo">{{ supplier.supplierinfo }}</textarea>
+        </p>
+
+        <p>
+            <label>Закупочная процедура</label><br>
+            <input type="text" name="procedureProc" value="{{ supplier.procedureProc }}" />
+        </p>
+
+        <p>
+            <label>Закупаемая продукция</label><br>
+            <textarea type="text" name="purchasedProd">{{ supplier.purchasedProd }}</textarea>
+        </p>
+
+        <p>
+            <label>Дата проведения аудита</label><br>
+            <input type="text" name="dateAudit" value="{{ supplier.dateAudit }}" />
+        </p>
+
+        <p>
+            <label>Результаты аудита</label><br>
+            <input type="text" name="auditResult" value="{{ supplier.auditResult }}" />
+        </p>
+
+        <p>
+            <label>Номер аудита</label><br>
+            <input type="text" name="numberAudit" value="{{ supplier.numberAudit }}" />
+        </p>
+
+        <p>
+            <label>Примечание</label><br>
+            <textarea type="text" name="comment">{{ supplier.comment }}</textarea>
+        </p>
+
+        <p>
+            <label>Команда аудиторов</label><br>
+            <textarea type="text" name="auditors">{{ supplier.auditors }}</textarea>
+        </p>
+
+               
+
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>
