@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title"></div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+                
+                <div class="indent_br"></div>
+                <div class="bold">NPP "Project 1"</div>                
+                <div class="indent_br"></div>
+
+                <div id="app1"></div>
+                <div class="indent_br"></div>
+                <div class="indent_br"></div>
+
+                <div class="bold">NPP "Project 2"</div>                
+                <div class="indent_br"></div>
+
+                <div id="app2"></div>
+                <div class="indent_br"></div>
+                <div class="indent_br"></div>
+
+                <div class="bold">NPP "Project 3"</div>                
+                <div class="indent_br"></div>
+
+                <div id="app3"></div>
+                <div class="indent_br"></div>
+
+                <div class="indent_br"></div>
+
+                <div class="descr_des">
+                    <div>LTTA - License and Technology Transfer Agreement.</div>
+                    <div>АДД - Аудит достоверности данных / DRA - Data reliability audit.</div>
+                    <div>CQ - Коммерческая аттестация поставщика / Commercial qualification of supplier.</div>
+                    <div>PQ - Продуктовая аттестация поставщика / Product qualification of supplier.</div>
+                </div>
+
+
+
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+</div>
+
+
+<script crossorigin src="/static/js/react.production.min.js"></script>
+<script crossorigin src="/static/js/react-dom.production.min.js"></script>
+<script src="/static/js/babel.min.js"></script>
+<script type="text/babel" src="/static/js/index.jsx"></script>
+
+
+
+<!-- 
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel" src="/static/js/index.jsx"></script>
+
+-->
+
+
+<!-- End Main-->
+{% endblock %}
