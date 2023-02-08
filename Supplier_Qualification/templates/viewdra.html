@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DRA</title>
+</head>
+<body class="container">
+    
+    <form method="POST" action="/createdra/">
+        {% csrf_token %}
+        <p>
+            <label>№</label><br>
+            <input type="text" name="numberItem" autocomplete="off" />
+        </p>
+        <p>
+            <label>№ заявки</label><br>
+            <input type="text" name="numberOrd" autocomplete="off" />
+        </p>
+        <p>
+            <label>Дата</label><br>
+            <input type="text" name="dateOrd" autocomplete="off" />
+        </p>
+        <p>
+            <label>Поставщик</label><br>
+            <textarea type="text" name="supplier" autocomplete="off"></textarea>
+        </p>
+
+        <p>
+            <label>Информация о поставщике</label><br>
+            <textarea type="text" name="supplierinfo" autocomplete="off"></textarea>
+        </p>
+
+        <p>
+            <label>Закупочная процедура</label><br>
+            <input type="text" name="procedureProc" autocomplete="off" />
+        </p>
+        <p>
+            <label>Закупаемая продукция</label><br>
+            <textarea type="text" name="purchasedProd" autocomplete="off"></textarea>
+        </p>
+        <p>
+            <label>Дата проведения аудита</label><br>
+            <input type="text" name="dateAudit" autocomplete="off" />
+        </p>
+        <p>
+            <label>Результаты аудита</label><br>
+            <input type="text" name="auditResult" autocomplete="off" />
+        </p>
+        <p>
+            <label>Номер аудита</label><br>
+            <input type="text" name="numberAudit" autocomplete="off" />
+        </p>
+        <p>
+            <label>Примечание</label><br>
+            <textarea type="text" name="comment" autocomplete="off"></textarea>
+        </p>
+        <p>
+            <label>Команда аудиторов</label><br>
+            <textarea type="text" name="auditors" autocomplete="off"></textarea>
+        </p>
+
+
+        <input type="submit" value="Сохранить">
+
+    </form>
+
+    {% if supplierlist.count > 0 %}
+    <h2>DRA Supplier list</h2>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <thead>
+            <th>ID</th>
+            <th>№</th>
+            <th>№ заявки</th>
+            <th>Дата</th>
+            <th>Поставщик</th>
+            <th>Информация о поставщике</th>
+            <th>Закупочная процедура</th>
+            <th>Закупаемая продукция</th>
+            <th>Дата проведения аудита</th>
+            <th>Результаты аудита</th>
+            <th>Номер аудита</th>
+            <th>Примечание</th>
+            <th>Команда аудиторов</th>
+            <th></th>
+        </thead>
+        {% for supplier in supplierlist %}
+        <tr>
+            <td>{{ supplier.id }}</td>
+            <td>{{ supplier.numberItem }}</td>
+            <td>{{ supplier.numberOrd }}</td>
+            <td>{{ supplier.dateOrd}}</td>
+            <td>{{ supplier.supplier }}</td>
+            <td>{{ supplier.supplierinfo }}</td>
+            <td>{{ supplier.procedureProc }}</td>
+            <td>{{ supplier.purchasedProd }}</td>
+            <td>{{ supplier.dateAudit}}</td>
+            <td>{{ supplier.auditResult }}</td>
+            <td>{{ supplier.numberAudit }}</td>
+            <td>{{ supplier.comment }}</td>
+            <td>{{ supplier.auditors }}</td>
+            <td><a href="/editdra/{{supplier.id}}">Изменить</a> | <a href="/deletedra/{{supplier.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
