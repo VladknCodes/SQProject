@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Supplier list</title>
+</head>
+<body class="container">
+    <form method="POST" action="/createsp/">
+        {% csrf_token %}
+        <p>
+            <label>Supplier</label><br>
+            <input type="text" name="name" />
+        </p>
+        
+        <p>
+            <label>Supplier Info</label><br>
+            <textarea type="text" name="supplierinfo"></textarea>
+        </p>
+
+
+        <p>
+            <label>Commercial qualification</label><br>
+            <input type="text" name="cq" />
+        </p>
+        
+        <p>
+            <label>Commercial qualification - Data</label><br>
+            <input type="text" name="cqdata" />
+        </p>
+        
+        <p>
+            <label>Product qualification</label><br>
+            <textarea type="text" name="pq"></textarea>
+        </p>
+
+        <p>
+            <label>Conducted audits and audit teams</label><br>
+            <textarea type="text" name="audited"></textarea>
+        </p>
+               
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if supplierlist.count > 0 %}
+    <h2>Supplier list</h2>
+    <table border="1" cellpadding="4" cellspacing="0">
+        
+        <thead>
+            <th>Id</th>
+            <th>Supplier</th>
+            <th>Supplier Info</th>
+            <th>Commercial qualification</th>
+            <th>Commercial qualification - Data</th>
+            <th>Product qualification</th>
+            <th>Conducted audits and audit teams</th>
+            <th></th>
+        </thead>
+        
+        {% for supplier in supplierlist %}
+        
+        <tr>
+            <td>{{ supplier.id }}</td>
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.supplierinfo }}</td>
+            <td>{{ supplier.cq }}</td>
+            <td>{{ supplier.cqdata }}</td>
+            <td>{{ supplier.pq }}</td>
+            <td>{{ supplier.audited }}</td>
+            <td><a href="/editsp/{{supplier.id}}">Изменить</a> | <a href="/deletesp/{{supplier.id}}">Удалить</a></td>
+        </tr>
+        
+        {% endfor %}
+        
+    </table>
+    {% endif %}
+</body>
+</html>
