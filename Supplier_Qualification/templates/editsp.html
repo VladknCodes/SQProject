@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Supplier list - Edit</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <p>
+            <label>Supplier</label><br>
+            <input type="text" name="name" value="{{ supplier.name }}" />
+        </p>
+        
+        
+        <p>
+            <label>Supplier Info</label><br>
+            <textarea type="text" name="supplierinfo">{{ supplier.supplierinfo }}</textarea>
+        </p>
+
+
+        <p>
+            <label>Commercial qualification</label><br>
+            <input type="text" name="cq" value="{{ supplier.cq }}" />
+        </p>
+        
+        
+        <p>
+            <label>Commercial qualification - Data</label><br>
+            <input type="text" name="cqdata" value="{{ supplier.cqdata }}" />
+        </p>
+        
+        
+        <p>
+            <label>Product qualification</label><br>
+            <textarea type="text" name="pq">{{ supplier.pq }}</textarea>
+        </p>
+
+
+        <p>
+            <label>Conducted audits and audit teams</label><br>
+            <textarea type="text" name="audited">{{ supplier.audited }}</textarea>
+        </p>
+               
+
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>
