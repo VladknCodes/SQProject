@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     
-    # Основные страниц сайта
+    # Основные страницы сайта
     path('', views.main),
     path('main/', views.main),
     path('qualification_status/', views.qualification_status),
