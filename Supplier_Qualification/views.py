@@ -506,7 +506,6 @@ def printdbsp(request):
 
 
 # Функция проверки даты и перевода в формат HTML 
-
 def dateToHtml(datefirst):
 
     if datefirst == "":
