@@ -1,11 +1,11 @@
 body {
-  	margin: 1;
+	margin: 1;
 	background-color: #EDEEF0;
 	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
-
+	
 img {
 	width: 100%;
 	height: auto;
@@ -41,7 +41,7 @@ img {
 .logo_space {
 	width: 14%;
 	height:10px;
-	margin: 0 auto;
+	margin: 0 auto;		
 }
 
 
@@ -68,26 +68,28 @@ img {
 		
 	background-color: #FFFFFF;
 	border: 1px solid #D7D8DB;
-	box-sizing: border-box;
+	box-sizing: border-box;		
 }
 
 
 .menu_sohow {
+	
 	width: 100%;
 	max-width: 1300px;
 	min-height: 58px;
 	margin: 0 auto;
-	background-color: #FFFFFF;
+	background-color: #FFFFFF;	
 }
 
 
 .menu_mob {
+	
 	align-items: center;
 	width: 100%;
 	margin: 0 auto;
 	background-color: #FFFFFF;
 	border: 1px solid #D7D8DB;
-	box-sizing: border-box;
+	box-sizing: border-box;		
 }
 
 
@@ -95,13 +97,13 @@ img {
 	font-family: 'Roboto', sans-serif;
 	font-size: 17px;
 	-webkit-font-smoothing: antialiased;
-	color: 	#34495e;
+	color: 	#34495e;	
 }
 
 
 .menu_block {
 	width: 20px;
-	padding-bottom: 20px;
+	padding-bottom: 20px;		
 }
 
 
@@ -114,7 +116,7 @@ img {
 	box-sizing: border-box;
 	min-height: 150px;
 	overflow: auto;
-	color: #34495e; 
+	color: #34495e;
 }
 
 
@@ -122,21 +124,19 @@ img {
 	width: 100%;
 	max-width: 1298px;
 	margin: 0 auto;
-	height: 20px;
+	height: 20px;	
+	
 }
 
 
 .main_window {
 	display: flex;
-	flex-direction: row;
-		
+	flex-direction: row;		
 	width: 100%;
 	max-width: 1298px;
 	margin: 0 auto;
-	position: relative;
-	
+	position: relative;	
 	color: 	#34495e;
-
 	font-family: 'Roboto', sans-serif;
 	font-size: 15px;
 	-webkit-font-smoothing: antialiased;
@@ -154,17 +154,17 @@ img {
 /*----------------------- Стиль окна без заголовка - Start ------------------------------ */
 
 .main_window_data {
+	
 	width: 80%;
 	margin: 0 auto;
 	position: relative;
 	border: 1px solid #D7D8DB;
 	box-sizing: border-box;
 	box-shadow: 0 2px 6px 0 rgba(0,0,0,.1);
-	padding: 5px;
+	padding: 5px;		
 }
 
 /*----------------------- Стиль окна без заголовка - End ------------------------------ */
-
 
 
 /*----------------------- Стили окна с заголовком - Start ------------------------------ */
@@ -179,6 +179,7 @@ img {
 	padding: 0px;
 }
 
+
 .main_window_data_cont_title {
 	margin: 0 auto;
 	padding: 5px;
@@ -187,15 +188,16 @@ img {
 	height: 16px;
 }
 
+
 .main_window_data_cont_sect {
 	margin: 0 auto;
-	padding: 5px;
+	padding: 5px;        
 }
 
 /*----------------------- Стили окна с заголовком - End ------------------------------ */
 
 
-.main_window_data_link {
+.main_window_data_link {	
 	width: 80%;
 	margin: 0 auto;
 	position: relative;
@@ -203,7 +205,7 @@ img {
 	box-sizing: border-box;
 	box-shadow: 0 2px 6px 0 rgba(0,0,0,.1);
 	padding: 5px;
-	background-color: #FFFFFF;
+	background-color: #FFFFFF;		
 }
 
 
@@ -225,7 +227,7 @@ img {
 	text-align:center;
 	font-size: 10px;
 	font-weight:bold;
-	color: #34495e;
+	color: #34495e;	
 }
 
 
@@ -238,59 +240,58 @@ a.m:visited {text-decoration:none;}
 a.text_link:link{
 	color: #4A76A8; 
 	text-decoration: underline;
-	font-weight:bold;
+	font-weight:bold;	
 }
 
 
 a.text_link:visited {
 	color: #4A76A8;
 	text-decoration: underline;
-	font-weight:bold;
+	font-weight:bold;	
 }
 
 
 a.text_link:hover{
 	color: #4A76A8;
 	text-decoration: underline;
-	font-weight:bold;
+	font-weight:bold;	
 }
 
 
 a.text_link:active{
 	color: #4A76A8;
 	text-decoration: underline;
-	font-weight:bold;
+	font-weight:bold;	
 }
-
 
 	
 a.main_link {text-decoration: none;}
 a.main_link:hover {text-decoration: none;}
 a.main_link:active {text-decoration: none;}
 a.main_link:visited {text-decoration: none;}
-	
+
 
 a.main_link_tr:link{
 	color: #34495e; 
-	text-decoration: underline;
+	text-decoration: underline;	
 }
 
 
 a.main_link_tr:visited {
 	color: #34495e;
-	text-decoration: underline;
+	text-decoration: underline;	
 }
 
 
 a.main_link_tr:hover{
 	color: #34495e;
-	text-decoration: underline;
+	text-decoration: underline;	
 }
 
 
 a.main_link_tr:active{
 	color: #34495e;
-	text-decoration: underline;
+	text-decoration: underline;	
 }
 
 
@@ -302,8 +303,7 @@ a.main_link_tr:active{
 	width: 100%;
 	border: none;
 	text-align: left;
-	outline: none;
-
+	outline: none;   
 	font-family: 'Roboto', sans-serif;
 	font-size: 17px;
 	-webkit-font-smoothing: antialiased;
@@ -341,7 +341,7 @@ a.main_link_tr:active{
 
 .table_prod {
 	display: flex;
-	flex-direction: row;
+	flex-direction: row;	
 }
 
 
@@ -354,13 +354,13 @@ a.main_link_tr:active{
 
 .table_indent {
 	width: 20px;
-	height:10px;
+	height:10px;			
 }
 
 
 .indent_div {
 	width: 7px;
-	height:7px;
+	height:7px;			
 }
 
 
@@ -378,21 +378,21 @@ a.main_link_tr:active{
 
 .chart_main {
 	width: 80%;
-	margin: 0 auto;
+	margin: 0 auto;		
 }
 
 
 .chart_indent {
 	width: 10%;
 	height:10px;
-	margin: 0 auto;
+	margin: 0 auto;		
 }
 
 
 .table_prod_suplcont {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: wrap;	
 }
 
 
@@ -461,9 +461,7 @@ a.main_link_tr:active{
 
 .table_tbody_as {
 	border: 2px solid lightgray;
-
 }
-
 
 
 .table_tr_as {
@@ -477,6 +475,7 @@ a.main_link_tr:active{
 
 
 /* Стили для раздела List of qualification specialists */
+
 .person {
 	display: flex;
 	flex-direction: row;
@@ -494,6 +493,7 @@ a.main_link_tr:active{
 
 
  /* Рабочие стили */
+
  .bold {
 	font-weight: bold;
  }
@@ -507,6 +507,7 @@ a.main_link_tr:active{
 
 
  /* Cтили для таблиц React js */
+
 .table_react {
 	font-size: 8px;
 	text-align: center;
