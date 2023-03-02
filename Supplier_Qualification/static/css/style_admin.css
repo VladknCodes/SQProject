@@ -1,0 +1,125 @@
+body {
+	margin: 1;
+	background-color: #ebebeb;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+/* Cтили для форм */
+
+input[type=text]
+{
+	width: 600px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+input[type=password]
+{
+	width: 600px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+textarea
+{
+	width: 600px;
+	height:100px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+input[type=submit]
+{
+	background-color: #5471cf;
+	color: white;
+	padding: 5px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+button
+{
+	background-color: #5471cf;
+	color: white;
+	padding: 5px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+.button_ed
+{
+	width: 100px;
+	background-color: #5471cf;
+	color: white;
+	padding: 5px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+.button_del
+{
+	width: 100px;
+	background-color: #5471cf;
+	color: rgb(238, 172, 172);
+	padding: 5px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+select
+{
+	width: 610px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+label
+{
+  font-weight: bold;
+}
+
+
+.indent_div {
+	width: 7px;
+	height:7px;
+}
+
+
+.indent_br {
+	width: 20px;
+	height:10px;
+}
