@@ -1,6 +1,6 @@
 from django.db import models
 
- 
+
 # Класс для таблицы с данными по персоналу
 class Person(models.Model):
     lastName = models.CharField(max_length=50, null=True, blank=True)
@@ -13,20 +13,19 @@ class Person(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.lastName, self.firstName)
-     
-     
+
+
 # Класс для таблицы с данными по аттестации поставщиков
 class Supplier(models.Model):
     name = models.TextField(null=True, blank=True)
     supplierinfo = models.TextField(null=True, blank=True)
     cq = models.TextField(null=True, blank=True)
     cqdata = models.TextField(null=True, blank=True)
-    pq = models.TextField(null=True, blank=True)
     audited = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
-     
+
 
 # Класс для таблицы с данными аудиту достоверности данных
 class DRA(models.Model):
@@ -54,3 +53,14 @@ class News(models.Model):
 
     def __str__(self):
         return self.dateNews
+
+
+# Класс для дочерней таблицы с данными по аттестации продукции (к основной таблице Supplier) 
+class Product(models.Model):
+    supplier = models.ForeignKey(Supplier, on_delete = models.CASCADE)
+    prodName = models.TextField(null=True, blank=True)
+    prodStatus = models.TextField(null=True, blank=True)
+    statusData = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.prodName
