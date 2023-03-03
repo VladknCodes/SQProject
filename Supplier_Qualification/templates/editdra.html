@@ -1,10 +1,23 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
 <head>
     <meta charset="utf-8" />
     <title>DRA Supplier list - Edit</title>
+
+    <link rel="stylesheet" href="{% static "css/style_admin.css" %}" />
+
 </head>
-<body class="container">
+<body>
+
+    <h3>Administration page</h3>
+    <div>Logged in user: <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></div>
+    <div class="indent_br"></div>
+
+
+    
     <form method="POST">
         {% csrf_token %}
 
@@ -70,7 +83,7 @@
 
                
 
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Submit" >
     </form>
 </body>
 </html>
