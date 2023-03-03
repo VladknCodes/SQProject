@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Adding Product Qualification</title>
+
+    <link rel="stylesheet" href="{% static "css/style_admin.css" %}" />
+
+</head>
+<body>
+
+    <h3>Administration page</h3>
+    <div>Logged in user: <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></div>
+    <div class="indent_br"></div>
+
+    
+    
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Product</label><br>
+            <input type="text" name="prodName" />
+        </p>
+        
+        <p>
+            <label>Product qualification status</label><br>
+            <input type="text" name="prodStatus" />
+        </p>
+
+        <p>
+            <label>Product qualification date</label><br>
+            <input type="text" name="statusData" />
+        </p>
+        
+        <p>
+            <label>Select supplier</label><br>
+            <select name="supplier">
+            {% for supplier in suppliers %}
+                <option value="{{supplier.id}}">{{supplier.name}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="Submit" >
+    </form>
+</body>
+</html>
