@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Product Qalification list</title>
+
+    <link rel="stylesheet" href="{% static "css/style_admin.css" %}" />
+
+</head>
+<body>
+
+
+    <h3>Administration page</h3>
+    <div>Logged in user: <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></div>
+    <div class="indent_br"></div>
+    <div class="indent_br"></div>
+
+    <a href="/createprod/"><button>Adding Product Qualification</button></a>
+    <div class="indent_br"></div>
+    
+    <h3>Product Qalification list</h3>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <thead><th>Id</th><th>Supplier ID</th><th>Product</th><th>Product qualification status</th><th>Product qualification date</th><th>Supplier</th><th></th></thead>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.supplier.id }}</td>
+            <td>{{ product.prodName }}</td>
+            <td>{{ product.prodStatus }}</td>
+            <td>{{ product.statusData }}</td>
+            <td>{{ product.supplier.name }}</td>
+            <td>
+                <a href="/editprod/{{product.id}}"><button class="button_ed">Edit</button></a>
+                <div class="indent_br"></div>
+                <a href="/deleteprod/{{product.id}}" onclick="return confirm('Are you sure?')"><button class="button_del">Delete</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+</body>
+</html>
