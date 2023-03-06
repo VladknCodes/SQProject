@@ -1,50 +1,51 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
 <head>
     <meta charset="utf-8" />
     <title>Supplier list - Edit</title>
+
+    <link rel="stylesheet" href="{% static "css/style_admin.css" %}" />
+
 </head>
-<body class="container">
+<body>
+
+    <h3>Administration page</h3>
+    <div>Logged in user: <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></div>
+    <div class="indent_br"></div>
+
+
     <form method="POST">
         {% csrf_token %}
         
         <p>
             <label>Supplier</label><br>
             <input type="text" name="name" value="{{ supplier.name }}" />
-        </p>
-        
+        </p>       
         
         <p>
             <label>Supplier Info</label><br>
             <textarea type="text" name="supplierinfo">{{ supplier.supplierinfo }}</textarea>
         </p>
 
-
         <p>
             <label>Commercial qualification</label><br>
             <input type="text" name="cq" value="{{ supplier.cq }}" />
-        </p>
-        
+        </p>        
         
         <p>
             <label>Commercial qualification - Data</label><br>
             <input type="text" name="cqdata" value="{{ supplier.cqdata }}" />
-        </p>
-        
-        
-        <p>
-            <label>Product qualification</label><br>
-            <textarea type="text" name="pq">{{ supplier.pq }}</textarea>
-        </p>
-
+        </p>        
 
         <p>
             <label>Conducted audits and audit teams</label><br>
             <textarea type="text" name="audited">{{ supplier.audited }}</textarea>
-        </p>
-               
+        </p>               
 
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Submit" >
     </form>
 </body>
 </html>
