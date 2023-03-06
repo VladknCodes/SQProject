@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
 <head>
     <meta charset="utf-8" />
     <title>Supplier list</title>
+
+    <link rel="stylesheet" href="{% static "css/style_admin.css" %}" />
+
 </head>
-<body class="container">
+<body>
+
+    <h3>Administration page</h3>
+    <div>Logged in user: <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></div>
+    <div class="indent_br"></div>
+
     <form method="POST" action="/createsp/">
         {% csrf_token %}
         <p>
@@ -27,50 +38,49 @@
             <label>Commercial qualification - Data</label><br>
             <input type="text" name="cqdata" />
         </p>
-        
-        <p>
-            <label>Product qualification</label><br>
-            <textarea type="text" name="pq"></textarea>
-        </p>
-
+      
         <p>
             <label>Conducted audits and audit teams</label><br>
             <textarea type="text" name="audited"></textarea>
         </p>
                
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Submit" >
     </form>
+    
     {% if supplierlist.count > 0 %}
-    <h2>Supplier list</h2>
-    <table border="1" cellpadding="4" cellspacing="0">
-        
-        <thead>
-            <th>Id</th>
-            <th>Supplier</th>
-            <th>Supplier Info</th>
-            <th>Commercial qualification</th>
-            <th>Commercial qualification - Data</th>
-            <th>Product qualification</th>
-            <th>Conducted audits and audit teams</th>
-            <th></th>
-        </thead>
-        
-        {% for supplier in supplierlist %}
-        
-        <tr>
-            <td>{{ supplier.id }}</td>
-            <td>{{ supplier.name }}</td>
-            <td>{{ supplier.supplierinfo }}</td>
-            <td>{{ supplier.cq }}</td>
-            <td>{{ supplier.cqdata }}</td>
-            <td>{{ supplier.pq }}</td>
-            <td>{{ supplier.audited }}</td>
-            <td><a href="/editsp/{{supplier.id}}">Изменить</a> | <a href="/deletesp/{{supplier.id}}">Удалить</a></td>
-        </tr>
-        
-        {% endfor %}
-        
-    </table>
+        <h3>Supplier Commercial and Product qualification list</h3>
+        <table border="1" cellpadding="4" cellspacing="0">
+            
+            <thead>
+                <th>Id</th>
+                <th>Supplier</th>
+                <th>Supplier Info</th>
+                <th>Commercial qualification</th>
+                <th>Commercial qualification - Data</th>
+                <th>Conducted audits and audit teams</th>
+                <th></th>
+            </thead>
+            
+            {% for supplier in supplierlist %}
+            
+                <tr>
+                    <td>{{ supplier.id }}</td>
+                    <td>{{ supplier.name }}</td>
+                    <td>{{ supplier.supplierinfo }}</td>
+                    <td>{{ supplier.cq }}</td>
+                    <td>{{ supplier.cqdata }}</td>
+                    <td>{{ supplier.audited }}</td>
+                    <td>
+                        <a href="/editsp/{{supplier.id}}"><button class="button_ed">Edit</button></a>
+                        <div class="indent_br"></div>
+                        <a href="/deletesp/{{supplier.id}}" onclick="return confirm('Are you sure?')"><button class="button_del">Delete</button></a>
+                    </td>
+                </tr>
+            
+            {% endfor %}
+            
+        </table>
     {% endif %}
+
 </body>
 </html>
