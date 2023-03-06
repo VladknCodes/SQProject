@@ -8,9 +8,10 @@ from .models import Person
 from .models import Supplier
 from .models import DRA
 from .models import News
+from .models import Product
 
+from django.contrib.auth.decorators import login_required
 
-import json
 import datetime
 import os
 
@@ -35,7 +36,7 @@ def qprocess(request):
 
 def dra(request):
     supplierlist = DRA.objects.all()
-    return render(request, "dra.html", {'title' : "Data reliability audit", 'supplierlist' : supplierlist})
+    return render(request, "dra.html", {'title' : "Data reliability audit / Аудит достоверности данных", 'supplierlist' : supplierlist})
 
 # Страница персонала
 def lqs(request):
@@ -50,7 +51,7 @@ def lqs(request):
         # Формирование списка файлов - Certificates
         
         link_files = "/static/files/lqs/" + str(per_id.id) + "/"
-        dirPath = "..\\static\\files\\lqs\\" + str(per_id.id)
+        dirPath = "\\static\\files\\lqs\\" + str(per_id.id)
         
         # Получение списка имен файлов в дереве каталога
         files = next(os.walk(dirPath))[2]
@@ -79,8 +80,7 @@ def lqs(request):
 # Функция вывода списка по аттестации поставщиков на странице сайта "qualification_status"
 
 def printtablelist ():
-    
-    
+       
     supplierlist = Supplier.objects.in_bulk()
     ttop = """
     <table class="table_st">
@@ -103,16 +103,12 @@ def printtablelist ():
         
     for id in supplierlist:
 
-        # Проверка на соответствие JSON
-        try:
-            pqjs = json.loads(supplierlist[id].pq)
-        except ValueError as e:
-            pqlist = ""
-        else:
-            pqlist = ""
-            for t in pqjs:
-                pqlist = pqlist + t[0] +": " + qStatusToHtml(t[1]) + " " + dateToHtml(t[2]) + "<br>"
-
+        # Получение из дочерней таблицы "Product" данных по продуктовой аттестации по определённому поставщику
+        products_list = Product.objects.filter(supplier__id=supplierlist[id].id)
+        prod_txt = ""
+       
+        for product in products_list:
+            prod_txt = prod_txt + product.prodName +": " + qStatusToHtml(product.prodStatus) + " " + dateToHtml(product.statusData) + "<br>"
 
 
         tcenter = (tcenter
@@ -129,7 +125,7 @@ def printtablelist ():
                    + " "
                    + dateToHtml(supplierlist[id].cqdata)
                    + """</td><td class="table_th_td_st">"""
-                   + str(pqlist)
+                   + str(prod_txt)
                    + "</td></tr>"
                    + "\n")
        
@@ -148,16 +144,13 @@ def supplier(request, id):
     try:
         supplier = Supplier.objects.get(id=id)
 
-
-        # Проверка на соответствие JSON
-        try:
-            pqjs = json.loads(supplier.pq)
-        except ValueError as e:
-            pqlist = ""
-        else:
-            pqlist = ""
-            for t in pqjs:
-                pqlist = pqlist + """<div>""" + t[0] +": " + t[1] + " " + t[2] + """</div>"""
+      
+        # Получение из дочерней таблицы "Product" данных по продуктовой аттестации по определённому поставщику
+        products_list = Product.objects.filter(supplier__id=supplier.id)
+        prod_txt = ""
+       
+        for product in products_list:
+            prod_txt = prod_txt + """<div>""" + product.prodName +": " + product.prodStatus + " " + product.statusData + """</div>"""
 
         
         # Формирование списка файлов - CQ и PQ
@@ -165,8 +158,8 @@ def supplier(request, id):
         link_files_cq = "/static/files/cqpq/" + str(supplier.id) + "/" + "cq" + "/"
         link_files_pq = "/static/files/cqpq/" + str(supplier.id) + "/" + "pq" + "/"
 
-        dirPathCQ = "..\\static\\files\\cqpq\\" + str(supplier.id) + "\\cq"
-        dirPathPQ = "..\\static\\files\\cqpq\\" + str(supplier.id) + "\\pq"
+        dirPathCQ = "\\static\\files\\cqpq\\" + str(supplier.id) + "\\cq"
+        dirPathPQ = "\\static\\files\\cqpq\\" + str(supplier.id) + "\\pq"
         
         # Получение списков имен файлов в дереве каталогов
         filesCQ = next(os.walk(dirPathCQ))[2]
@@ -177,7 +170,7 @@ def supplier(request, id):
             'title' : supplier.name,
             'supplier.supplierinfo' : supplier.supplierinfo,
             'supplier' : supplier,
-            'pqlist' : pqlist,
+            'prod_txt' : prod_txt,
             'filesCQ' : filesCQ,
             'filesPQ' : filesPQ,
             'link_files_cq' : link_files_cq,
@@ -205,7 +198,7 @@ def supplierdra(request, id):
         # Формирование списка файлов - DRA
         
         link_files = "/static/files/dra/" + str(supplier.numberOrd) + "/"
-        dirPath = "..\\static\\files\\dra\\" + str(supplier.numberOrd)
+        dirPath = "\\static\\files\\dra\\" + str(supplier.numberOrd)
         
         # Получение списка имен файлов в дереве каталога
         files = next(os.walk(dirPath))[2]
@@ -232,6 +225,9 @@ def supplierdra(request, id):
 
 
 
+
+
+
 # Страницы администрирования базы данных
 # --------------------------------------------------------------------------------------------------------------
 
@@ -239,12 +235,14 @@ def supplierdra(request, id):
 # --------------------------------------------------------------------------------------------------------------
 
 # Получение данных из БД
+@login_required
 def viewdb(request):
     people = Person.objects.all()
     return render(request, "viewdb.html", {"people": people})
 
 
 # Сохранение данных в БД
+@login_required
 def create(request):
     if request.method == "POST":
         person = Person()
@@ -262,6 +260,7 @@ def create(request):
 
 
 # Изменение данных в БД
+@login_required
 def edit(request, id):
     try:
         person = Person.objects.get(id=id)
@@ -284,6 +283,7 @@ def edit(request, id):
 
 
 # Удаление данных из БД
+@login_required
 def delete(request, id):
     try:
         person = Person.objects.get(id=id)
@@ -303,12 +303,14 @@ def delete(request, id):
 # --------------------------------------------------------------------------------------------------------------
 
 # Получение данных из БД
+@login_required
 def viewdbsp(request):
     supplierlist = Supplier.objects.all()
     return render(request, "viewdbsp.html", {"supplierlist": supplierlist})
 
 
 # Сохранение данных в БД
+@login_required
 def createsp(request):
     if request.method == "POST":
         supplier = Supplier()
@@ -316,7 +318,6 @@ def createsp(request):
         supplier.supplierinfo = request.POST.get("supplierinfo")
         supplier.cq = request.POST.get("cq")
         supplier.cqdata = request.POST.get("cqdata")
-        supplier.pq = request.POST.get("pq")
         supplier.audited = request.POST.get("audited")
 
         supplier.save()
@@ -324,6 +325,7 @@ def createsp(request):
 
 
 # Изменение данных в БД
+@login_required
 def editsp(request, id):
     try:
         supplier = Supplier.objects.get(id=id)
@@ -333,7 +335,6 @@ def editsp(request, id):
             supplier.supplierinfo = request.POST.get("supplierinfo")
             supplier.cq = request.POST.get("cq")
             supplier.cqdata = request.POST.get("cqdata")
-            supplier.pq = request.POST.get("pq")
             supplier.audited = request.POST.get("audited")
 
             supplier.save()
@@ -345,6 +346,7 @@ def editsp(request, id):
 
 
 # Удаление данных из БД
+@login_required
 def deletesp(request, id):
     try:
         supplier = Supplier.objects.get(id=id)
@@ -364,12 +366,14 @@ def deletesp(request, id):
 # --------------------------------------------------------------------------------------------------------------
 
 # Получение данных из БД-DRA
+@login_required
 def viewdra(request):
     supplierlist = DRA.objects.all()
     return render(request, "viewdra.html", {"supplierlist": supplierlist})
 
 
 # Сохранение данных в БД-DRA
+@login_required
 def createdra(request):
     if request.method == "POST":
         supplier = DRA()
@@ -392,6 +396,7 @@ def createdra(request):
 
 
 # Изменение данных в БД-DRA
+@login_required
 def editdra(request, id):
     try:
         supplier = DRA.objects.get(id=id)
@@ -419,6 +424,7 @@ def editdra(request, id):
 
 
 # Удаление данных из БД-DRA
+@login_required
 def deletedra(request, id):
     try:
         supplier = DRA.objects.get(id=id)
@@ -434,11 +440,88 @@ def deletedra(request, id):
 
 
 
-# Станица вывода таблицы по аттестации поставщиков Start--------------------------------------------------------
+# Страница Product Qalification list
+# Дочерняя таблица Product (данные по аттестации продукции к основной таблице Supplier ) Start
+# --------------------------------------------------------------------------------------------------------------
+
+# # Получение данных из БД-Product
+@login_required
+def viewprod(request):
+    products = Product.objects.all()
+    return render(request, "viewprod.html", {"products": products})
+ 
+# Добавление данных из БД-Product
+@login_required
+def createprod(request):
+    # если запрос POST, сохраняем данные
+    if request.method == "POST":
+        product = Product()
+        product.prodName = request.POST.get("prodName")
+        product.prodStatus = request.POST.get("prodStatus")
+        product.statusData = request.POST.get("statusData")
+        product.supplier_id = request.POST.get("supplier")
+        
+        product.save()
+        return HttpResponseRedirect("/viewprod")
+    # передаем данные в шаблон
+    suppliers = Supplier.objects.all()
+    return render(request, "createprod.html", {"suppliers": suppliers})
+ 
+# Изменение данных в БД-Product
+@login_required
+def editprod(request, id):
+    try:
+        product = Product.objects.get(id=id)
+ 
+        if request.method == "POST":
+            product.prodName = request.POST.get("prodName")
+            product.prodStatus = request.POST.get("prodStatus")
+            product.statusData = request.POST.get("statusData")
+            product.supplier_id = request.POST.get("supplier")
+
+            product.save()
+            return HttpResponseRedirect("/viewprod")
+        else:
+            suppliers = Supplier.objects.all()
+            return render(request, "editprod.html", {"product": product, "suppliers": suppliers})
+    except Product.DoesNotExist:
+        return HttpResponseNotFound("<h2>Product not found</h2>")
+     
+# Удаление данных из БД-Product 
+@login_required
+def deleteprod(request, id):
+    try:
+        product = Product.objects.get(id=id)
+        product.delete()
+        return HttpResponseRedirect("/viewprod")
+    except Product.DoesNotExist:
+        return HttpResponseNotFound("<h2>Product not found</h2>")
+
+# Страница Product Qalification list
+# Дочерняя таблица Product (данные по аттестации продукции к основной таблице Supplier ) End
+# --------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################################
+# Дополнительные функции для работы сайта-----------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------
+
+
+# Станица вывода таблицы c данными по аттестации поставщиков Start----------------------------------------------
 # --------------------------------------------------------------------------------------------------------------
 
 def printdbsp(request):
     supplierlist = Supplier.objects.in_bulk()
+
     ttop = """
     <table border="1" cellpadding="4" cellspacing="0">
     <tbody>
@@ -459,17 +542,17 @@ def printdbsp(request):
     </table>
     """
         
+    
     for id in supplierlist:
 
-        # Проверка на соответствие JSON
-        try:
-            pqjs = json.loads(supplierlist[id].pq)
-        except ValueError as e:
-            pqlist = ""
-        else:
-            pqlist = ""
-            for t in pqjs:
-                pqlist = pqlist + t[0] +": " + t[1] + " " + t[2] + """<div class="indent_br"></div>""" + "\n"
+
+        # Получение из дочерней таблицы "Product" данных по продуктовой аттестации по определённому поставщику
+        products_list = Product.objects.filter(supplier__id=supplierlist[id].id)
+        prod_txt = ""
+       
+        for product in products_list:
+            prod_txt = prod_txt + product.prodName +": " + product.prodStatus + " " + product.statusData + """<div class="indent_br"></div>""" + "\n"
+
 
 
         tcenter = (tcenter
@@ -484,24 +567,19 @@ def printdbsp(request):
                    + "</td><td>"
                    + supplierlist[id].cqdata
                    + "</td><td>"
-                   + str(pqlist)
+                   + str(prod_txt)
                    + "</td><td>"
                    + supplierlist[id].audited
                    + "</td></tr>"
                    + "\n")
         
-        
     return HttpResponse(ttop + tcenter + tbottom)
 
-# Станица вывода таблицы по аттестации поставщиков End----------------------------------------------------------
+# Станица вывода таблицы c данными по аттестации поставщиков End------------------------------------------------
 # --------------------------------------------------------------------------------------------------------------
 
 
 
-
-
-# Дополнительные функции для работы сайта-----------------------------------------------------------------------
-# --------------------------------------------------------------------------------------------------------------
 
 
 # Функция проверки даты и перевода в формат HTML 
@@ -523,6 +601,7 @@ def dateToHtml(datefirst):
             pqdatеstr = """<font color="00BC00">""" + "[" + str(dateqalif.strftime("%Y-%m-%d")) + "]" +"""</font>"""
             
         return pqdatеstr
+
 
 
 
