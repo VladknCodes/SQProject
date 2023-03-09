@@ -78,7 +78,7 @@ function App (props) {
 
     <thead class="table_thead_as">
 				  <tr class="table_tr_as">
-            <th class="table_th_td_as">Priduct</th>
+            <th class="table_th_td_as">Product</th>
             <th class="table_th_td_as" width="20">LTTA</th>
             <th class="table_th_td_as" width="20">Jan 2023</th>
             <th class="table_th_td_as" width="20">Feb 2023</th>
