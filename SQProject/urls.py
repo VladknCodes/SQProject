@@ -28,7 +28,7 @@ urlpatterns = [
     path('editsp/<int:id>/', views.editsp),
     path('deletesp/<int:id>/', views.deletesp),
 
-    # Страницы просмотра и редактирования данных дочереней таблицы Product (данные по аттестации продукции к основной таблице Supplier )
+    # Страницы просмотра и редактирования данных дочерней таблицы Product (данные по аттестации продукции к основной таблице Supplier )
     path('viewprod/', views.viewprod),
     path('createprod/', views.createprod),
     path('editprod/<int:id>/', views.editprod),
