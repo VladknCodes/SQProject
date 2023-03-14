@@ -15,7 +15,6 @@ async function get_user_name(urldata) {
   var user = await response.json();
   
   return user;
-
 }
 {/* ---------------------------- */}
 
@@ -24,24 +23,16 @@ async function get_user_name(urldata) {
 {/* Рендеринг элементов в асинхронной функции */}
 (async () => {
   
-  console.log(await get_user_name('/static/js/paks_ap.json'));
-  ReactDOM.createRoot(document.getElementById("app1")).render(<App data={await get_user_name('/static/js/paks_ap.json')} />);
+  console.log(await get_user_name('/static/js/project_1.json'));
+  ReactDOM.createRoot(document.getElementById("app1")).render(<App data={await get_user_name('/static/js/project_1.json')} />);
   
-})();
-
-
-(async () => {
   
-  console.log(await get_user_name('/static/js/akkuyu_ap.json'));
-  ReactDOM.createRoot(document.getElementById("app2")).render(<App data={await get_user_name('/static/js/akkuyu_ap.json')} />);
+  console.log(await get_user_name('/static/js/project_2.json'));
+  ReactDOM.createRoot(document.getElementById("app2")).render(<App data={await get_user_name('/static/js/project_2.json')} />);
   
-})();
-
-
-(async () => {
   
-  console.log(await get_user_name('/static/js/eldabaa_ap.json'));
-  ReactDOM.createRoot(document.getElementById("app3")).render(<App data={await get_user_name('/static/js/eldabaa_ap.json')} />);
+  console.log(await get_user_name('/static/js/project_3.json'));
+  ReactDOM.createRoot(document.getElementById("app3")).render(<App data={await get_user_name('/static/js/project_3.json')} />);
   
 })();
 {/* ---------------------------- */}
