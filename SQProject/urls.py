@@ -6,6 +6,7 @@ urlpatterns = [
     
     # Административная панель
     path('admin/', admin.site.urls),
+
     
     # Основные страниц сайта
     path('', views.main),
@@ -46,8 +47,11 @@ urlpatterns = [
     # Страница поставщика по ID
     path('qualification_status/<int:id>/', views.supplier),
     
-    # Cтраницы поставщика DRA по ID
+    # Cтраница поставщика DRA по ID
     path('dra/<int:id>/', views.supplierdra),
+
+    # Cтраница DRA реестр аудиторов
+    path('draauditors/', views.draauditors),
 
     # При отсутствии регистрации в системе переход на /accounts/login/ для регистрации
     path("accounts/", include("django.contrib.auth.urls")),
