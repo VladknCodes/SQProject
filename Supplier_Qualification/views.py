@@ -2,6 +2,7 @@
 # Developed by Kartashov Vladislav.
 # 2023.
 
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from .models import Person
@@ -9,6 +10,7 @@ from .models import Supplier
 from .models import DRA
 from .models import News
 from .models import Product
+from .models import DRAauditors
 
 from django.contrib.auth.decorators import login_required
 
@@ -36,7 +38,11 @@ def qprocess(request):
 
 def dra(request):
     supplierlist = DRA.objects.all()
-    return render(request, "dra.html", {'title' : "Data reliability audit / Аудит достоверности данных", 'supplierlist' : supplierlist})
+    return render(request, "dra.html", {'title' : "Аудит достоверности данных", 'supplierlist' : supplierlist})
+
+def draauditors(request):
+    auditors = DRAauditors.objects.all()
+    return render(request, "draauditors.html", {'title' : "Аудит достоверности данных - Реестр аудиторов", 'auditors' : auditors})
 
 # Страница персонала
 def lqs(request):
