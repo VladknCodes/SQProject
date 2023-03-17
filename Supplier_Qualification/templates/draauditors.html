@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main_indent"></div>
+    <div class="bold"><center>{{ title }}</center></div>
+    <div class="main_indent"></div>
+
+
+    <!-- Main window -->
+    <div class="main_window ">
+        <div class="main_block"></div>
+        
+        <div class="main_window_data_cont">
+            <div class="main_window_data_cont_title"></div>
+            <div class="main_window_data_cont_sect">
+                <!-- Content Start -->
+
+
+                <script>
+                    function printExpDateAttest(dataRes) {
+                        let dateNow = new Date().toJSON().split("T")[0];
+                        
+                        if (Date.parse(dataRes) >= Date.parse(dateNow)) {
+                            document.write(dataRes);
+                        }
+
+                        else {
+                            document.write('<font color="#FF1A1A"><strong>' + dataRes + '</strong></font>');
+                        }
+                    }
+                </script>
+                                
+                
+                {% if auditors.count > 0 %}
+
+
+                        <table class="table_st">
+                            <thead class="table_thead_st">
+                                <tr class="table_tr_st">
+                                    <th class="table_th_td_st">№</th>
+                                    <th class="table_th_td_st">ФИО</th>
+                                    <th class="table_th_td_st">Должность</th>
+                                    <th class="table_th_td_st">Дата аттестации</th>
+                                    <th class="table_th_td_st">№ Удостоверения</th>
+                                    <th class="table_th_td_st">Кол-во участий в АДД</th>
+                                    <th class="table_th_td_st">Статус аудитора</th>
+                                    <th class="table_th_td_st">Срок действия результатов аттестации</th>
+                                    <th class="table_th_td_st">Примечание</th>
+                                </tr>
+
+                            </thead>
+
+                            {% for auditor in auditors %}
+                                    <tr class="table_tr_st table_tr_link">
+                                        <td class="table_th_td_st">{{ forloop.counter }}</td>
+                                        <td class="table_th_td_st bold">{{ auditor.name }}</td>
+                                        <td class="table_th_td_st">{{ auditor.position }}</td>
+                                        <td class="table_th_td_st">{{ auditor.dateAttest }}</td>
+                                        <td class="table_th_td_st">{{ auditor.certNumber }}</td>
+                                        <td class="table_th_td_st">{{ auditor.quantDRA }}</td>
+                                        <td class="table_th_td_st">{{ auditor.auditorStatus }}</td>                        
+                                        <td class="table_th_td_st"><script>printExpDateAttest('{{ auditor.expDateAttest }}')</script></td> 
+                                        <td class="table_th_td_st">{{ auditor.comment }}</td>
+                                    </tr>
+                            {% endfor %}
+                            
+                        </table>
+
+
+                {% endif %}
+
+
+                <!-- Content End -->
+            </div>
+        
+        </div>
+        <div class="main_block"></div>
+    </div>
+    <!-- End Main window -->
+
+
+
+
+
+    <div class="main_indent"></div>
+
+
+
+</div>
+
+<!-- End Main-->
+{% endblock %}
