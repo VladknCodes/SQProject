@@ -44,6 +44,21 @@ class DRA(models.Model):
 
     def __str__(self):
         return self.supplier
+    
+    
+ # Класс для таблицы с данными по статусу аудиторов АДД
+class DRAauditors(models.Model):
+    name = models.CharField(max_length=50, null=True, blank=True)
+    position = models.CharField(max_length=100, null=True, blank=True)
+    dateAttest = models.CharField(max_length=20, null=False, blank=True)
+    certNumber = models.CharField(max_length=20, null=True, blank=True)
+    quantDRA = models.CharField(max_length=5, null=True, blank=True)
+    auditorStatus = models.CharField(max_length=50, null=True, blank=True)
+    expDateAttest = models.CharField(max_length=20, null=False, blank=True)
+    comment = models.TextField(null=False, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 # Класс для таблицы с данными по новостному блоку
