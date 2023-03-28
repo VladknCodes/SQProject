@@ -535,3 +535,10 @@ button
 	font-size: 15px;
 	font-family: 'Roboto', sans-serif;
 }
+
+
+.text_format
+{
+	white-space: pre-line;
+	white-space: pre;
+}
