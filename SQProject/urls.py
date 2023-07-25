@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from Supplier_Qualification import views
+
+
  
 urlpatterns = [
     
@@ -9,14 +11,17 @@ urlpatterns = [
 
     
     # Основные страниц сайта
-    path('', views.main),
-    path('main/', views.main),
+    
+    # DRF
+    path('', views.appnews),
+    
     path('qualification_status/', views.qualification_status),
     path('audit_schedule/', views.audit_schedule),
     path('qprocess/', views.qprocess),
     path('dra/', views.dra),
     path('lqs/', views.lqs),
 
+    
     # Страницы просмотра и редактирования данных таблицы Person (данные по персоналу) 
     path('viewdb/', views.viewdb),
     path('create/', views.create),
@@ -55,5 +60,9 @@ urlpatterns = [
 
     # При отсутствии регистрации в системе переход на /accounts/login/ для регистрации
     path("accounts/", include("django.contrib.auth.urls")),
-        
+
+    # DRF
+    path('api/news/', views.NewsListCreate.as_view()),
+
+       
 ]
