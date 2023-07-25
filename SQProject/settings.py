@@ -1,23 +1,12 @@
 """
 Django settings for SQProject project.
 
-Based on by 'django-admin startproject' using Django 2.1.2.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/2.1/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/2.1/ref/settings/
-"""
-
 import os
 import posixpath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '.......'
@@ -28,7 +17,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application references
-# https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
     # Add your apps here to enable them
     'Supplier_Qualification',
@@ -38,10 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 # Middleware framework
-# https://docs.djangoproject.com/en/2.1/topics/http/middleware/
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
